@@ -16,13 +16,15 @@ All AWS dashboards are coming with account_ids and regions filter.
 
 Located under [./dashboards/aws](./dashboards/aws)
 
-**Note**: aws_asset_inventory.json will require to execute the following [view](./views/aws_resources.sql) before importing the dashboard.
+**Note**: aws_asset_inventory.json will require to execute the following [view](https://github.com/cloudquery/cq-provider-aws/blob/main/views/resources.sql) before importing the dashboard.
 
 ### GCP
 
 All GCP dashboards are comming with project_ids filter
 
 Located under [./dashboards/gcp](./dashboards/gcp)
+
+**Note**: aws_asset_inventory.json will require to execute the following [view](https://github.com/cloudquery/cq-provider-gcp/blob/main/views/resource.sql) before importing the dashboard.
 
 ### Examples
 
