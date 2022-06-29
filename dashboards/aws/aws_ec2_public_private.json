@@ -185,7 +185,7 @@
             {
               "matcher": {
                 "id": "byName",
-                "options": "Privatee Instances"
+                "options": "Private Instances"
               },
               "properties": [
                 {
@@ -263,7 +263,7 @@
             "hide": false,
             "metricColumn": "none",
             "rawQuery": true,
-            "rawSql": "SELECT\n  count(*) as \"Privatee Instances\"\nFROM aws_ec2_instances where (aws_ec2_instances.subnet_id in (${Subnets}) and aws_ec2_instances.region in (${Region}) and aws_ec2_instances.public_ip_address is null)",
+            "rawSql": "SELECT\n  count(*) as \"Private Instances\"\nFROM aws_ec2_instances where (aws_ec2_instances.subnet_id in (${Subnets}) and aws_ec2_instances.region in (${Region}) and aws_ec2_instances.public_ip_address is null)",
             "refId": "B",
             "select": [
               [
