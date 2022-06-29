@@ -19,15 +19,15 @@ Currently we have cloud asset inventory dashboards for AWS, GCP filterable by ac
 
 ### AWS
 
-Located under [./dashboards/aws](./dashboards/aws)
+> ⚠️ **Note**: aws_asset_inventory.json will require execution of the following [view](https://github.com/cloudquery/cq-provider-aws/blob/main/views/resources.sql) before importing the dashboard.
 
-**Note**: aws_asset_inventory.json will require to execute the following [view](https://github.com/cloudquery/cq-provider-aws/blob/main/views/resources.sql) before importing the dashboard.
+Located under [./dashboards/aws](./dashboards/aws)
 
 ### GCP
 
-Located under [./dashboards/gcp](./dashboards/gcp)
+> ⚠️ **Note**: gcp_asset_inventory.json will require execution of the following [view](https://github.com/cloudquery/cq-provider-gcp/blob/main/views/resource.sql) before importing the dashboard.
 
-**Note**: gcp_asset_inventory.json will require to execute the following [view](https://github.com/cloudquery/cq-provider-gcp/blob/main/views/resource.sql) before importing the dashboard.
+Located under [./dashboards/gcp](./dashboards/gcp)
 
 ### Examples
 
@@ -43,5 +43,5 @@ Here is an example of AWS EC2 Public and Private Instances Grafana dashboard:
 
 ## Contributions
 
-PRs are welcome with news dashboards, also feel free to ask for new dashboards via [GitHub Issues](https://github.com/cloudquery/grafana-dashboards) or hop on [discord](https://cloudquery.io/discord)
+PRs are welcome with new dashboards. Also feel free to ask for new dashboards via [GitHub Issues](https://github.com/cloudquery/grafana-dashboards) or hop on [discord](https://cloudquery.io/discord)
 
