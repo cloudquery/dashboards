@@ -23,6 +23,12 @@ Currently we have cloud asset inventory dashboards for AWS, GCP filterable by ac
 
 Located under [./dashboards/aws](./dashboards/aws)
 
+### Azure
+
+> ⚠️ **Note**: azure_asset_inventory.json will require execution of the following [view](https://github.com/cloudquery/cq-provider-azure/blob/main/views/resource.sql) before importing the dashboard.
+
+Located under [./dashboards/azure](./dashboards/azure)
+
 ### GCP
 
 > ⚠️ **Note**: gcp_asset_inventory.json will require execution of the following [view](https://github.com/cloudquery/cq-provider-gcp/blob/main/views/resource.sql) before importing the dashboard.
