@@ -1,8 +1,8 @@
 {
   "__inputs": [
     {
-      "name": "DS_CLOUDSQL",
-      "label": "CloudSQL",
+      "name": "DS_POSTGRESQL",
+      "label": "PostgreSQL",
       "description": "",
       "type": "datasource",
       "pluginId": "postgres",
@@ -15,7 +15,7 @@
       "type": "grafana",
       "id": "grafana",
       "name": "Grafana",
-      "version": "8.4.7"
+      "version": "9.0.2"
     },
     {
       "type": "panel",
@@ -46,7 +46,10 @@
     "list": [
       {
         "builtIn": 1,
-        "datasource": "-- Grafana --",
+        "datasource": {
+          "type": "datasource",
+          "uid": "grafana"
+        },
         "enable": true,
         "hide": true,
         "iconColor": "rgba(0, 211, 255, 1)",
@@ -65,14 +68,252 @@
   "fiscalYearStartMonth": 0,
   "graphTooltip": 0,
   "id": null,
-  "iteration": 1655294390321,
+  "iteration": 1657117020146,
   "links": [],
   "liveNow": false,
   "panels": [
     {
+      "gridPos": {
+        "h": 1,
+        "w": 24,
+        "x": 0,
+        "y": 0
+      },
+      "id": 12,
+      "title": "CloudQuery",
+      "type": "row"
+    },
+    {
       "datasource": {
         "type": "postgres",
-        "uid": "${DS_CLOUDSQL}"
+        "uid": "${DS_POSTGRESQL}"
+      },
+      "description": "This panel will show OK if the gcp_resources view has been created and is accessible to the current Postgres user. See https://github.com/cloudquery/dashboards#gcp for more information.",
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "thresholds"
+          },
+          "mappings": [],
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "green",
+                "value": null
+              },
+              {
+                "color": "red",
+                "value": 80
+              }
+            ]
+          }
+        },
+        "overrides": [
+          {
+            "matcher": {
+              "id": "byFrameRefID",
+              "options": "A"
+            },
+            "properties": [
+              {
+                "id": "mappings",
+                "value": [
+                  {
+                    "options": {
+                      "0": {
+                        "index": 1,
+                        "text": "Not OK"
+                      },
+                      "1": {
+                        "index": 0,
+                        "text": "OK"
+                      }
+                    },
+                    "type": "value"
+                  }
+                ]
+              },
+              {
+                "id": "thresholds",
+                "value": {
+                  "mode": "absolute",
+                  "steps": [
+                    {
+                      "color": "red",
+                      "value": null
+                    },
+                    {
+                      "color": "green",
+                      "value": 1
+                    }
+                  ]
+                }
+              }
+            ]
+          }
+        ]
+      },
+      "gridPos": {
+        "h": 2,
+        "w": 7,
+        "x": 0,
+        "y": 1
+      },
+      "id": 14,
+      "options": {
+        "colorMode": "value",
+        "graphMode": "area",
+        "justifyMode": "auto",
+        "orientation": "auto",
+        "reduceOptions": {
+          "calcs": [
+            "lastNotNull"
+          ],
+          "fields": "",
+          "values": false
+        },
+        "textMode": "auto"
+      },
+      "pluginVersion": "9.0.2",
+      "targets": [
+        {
+          "datasource": {
+            "type": "postgres",
+            "uid": "${DS_POSTGRESQL}"
+          },
+          "format": "table",
+          "group": [],
+          "metricColumn": "none",
+          "rawQuery": true,
+          "rawSql": "SELECT count(*) FROM information_schema.tables\n     WHERE  table_schema = 'public'\n     AND    table_name   = 'gcp_resources'",
+          "refId": "A",
+          "select": [
+            [
+              {
+                "params": [
+                  "provisioned_throughput_in_mibps"
+                ],
+                "type": "column"
+              }
+            ]
+          ],
+          "table": "aws_efs_filesystems",
+          "timeColumn": "creation_time",
+          "timeColumnType": "timestamp",
+          "where": [
+            {
+              "name": "$__timeFilter",
+              "params": [],
+              "type": "macro"
+            }
+          ]
+        }
+      ],
+      "title": "Data Source",
+      "type": "stat"
+    },
+    {
+      "datasource": {
+        "type": "postgres",
+        "uid": "${DS_POSTGRESQL}"
+      },
+      "description": "Time since the most recent CloudQuery fetch happened.",
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "thresholds"
+          },
+          "decimals": 0,
+          "mappings": [],
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "green",
+                "value": null
+              }
+            ]
+          },
+          "unit": "dateTimeFromNow"
+        },
+        "overrides": []
+      },
+      "gridPos": {
+        "h": 2,
+        "w": 17,
+        "x": 7,
+        "y": 1
+      },
+      "id": 16,
+      "options": {
+        "colorMode": "value",
+        "graphMode": "area",
+        "justifyMode": "auto",
+        "orientation": "auto",
+        "reduceOptions": {
+          "calcs": [
+            "lastNotNull"
+          ],
+          "fields": "/^Time$/",
+          "values": false
+        },
+        "text": {},
+        "textMode": "value"
+      },
+      "pluginVersion": "9.0.2",
+      "targets": [
+        {
+          "datasource": {
+            "type": "postgres",
+            "uid": "${DS_POSTGRESQL}"
+          },
+          "format": "time_series",
+          "group": [],
+          "metricColumn": "none",
+          "rawQuery": true,
+          "rawSql": "select fetch_date as time, 1 from gcp_resources order by fetch_date desc limit 1;",
+          "refId": "A",
+          "select": [
+            [
+              {
+                "params": [
+                  "provisioned_throughput_in_mibps"
+                ],
+                "type": "column"
+              }
+            ]
+          ],
+          "table": "aws_efs_filesystems",
+          "timeColumn": "creation_time",
+          "timeColumnType": "timestamp",
+          "where": [
+            {
+              "name": "$__timeFilter",
+              "params": [],
+              "type": "macro"
+            }
+          ]
+        }
+      ],
+      "title": "Last Fetch",
+      "type": "stat"
+    },
+    {
+      "gridPos": {
+        "h": 1,
+        "w": 24,
+        "x": 0,
+        "y": 3
+      },
+      "id": 10,
+      "title": "Assets",
+      "type": "row"
+    },
+    {
+      "datasource": {
+        "type": "postgres",
+        "uid": "${DS_POSTGRESQL}"
       },
       "description": "",
       "fieldConfig": {
@@ -97,7 +338,7 @@
         "h": 11,
         "w": 7,
         "x": 0,
-        "y": 0
+        "y": 4
       },
       "id": 2,
       "options": {
@@ -114,12 +355,12 @@
         },
         "textMode": "auto"
       },
-      "pluginVersion": "8.4.7",
+      "pluginVersion": "9.0.2",
       "targets": [
         {
           "datasource": {
             "type": "postgres",
-            "uid": "${DS_CLOUDSQL}"
+            "uid": "${DS_POSTGRESQL}"
           },
           "format": "table",
           "group": [],
@@ -155,7 +396,7 @@
     {
       "datasource": {
         "type": "postgres",
-        "uid": "${DS_CLOUDSQL}"
+        "uid": "${DS_POSTGRESQL}"
       },
       "fieldConfig": {
         "defaults": {
@@ -177,10 +418,11 @@
         "h": 11,
         "w": 7,
         "x": 7,
-        "y": 0
+        "y": 4
       },
       "id": 4,
       "options": {
+        "displayLabels": [],
         "legend": {
           "displayMode": "list",
           "placement": "bottom"
@@ -191,7 +433,7 @@
             "lastNotNull"
           ],
           "fields": "",
-          "values": false
+          "values": true
         },
         "tooltip": {
           "mode": "single",
@@ -202,13 +444,13 @@
         {
           "datasource": {
             "type": "postgres",
-            "uid": "${DS_CLOUDSQL}"
+            "uid": "${DS_POSTGRESQL}"
           },
           "format": "table",
           "group": [],
           "metricColumn": "none",
           "rawQuery": true,
-          "rawSql": "select project_id, count(*) from gcp_resources where cq_table in (${cq_tables}) group by project_id order by count desc",
+          "rawSql": "select project_id as label, count(*) from gcp_resources where cq_table in (${cq_tables}) group by project_id order by count desc",
           "refId": "A",
           "select": [
             [
@@ -238,7 +480,7 @@
     {
       "datasource": {
         "type": "postgres",
-        "uid": "${DS_CLOUDSQL}"
+        "uid": "${DS_POSTGRESQL}"
       },
       "fieldConfig": {
         "defaults": {
@@ -247,7 +489,8 @@
           },
           "custom": {
             "align": "auto",
-            "displayMode": "auto"
+            "displayMode": "auto",
+            "inspect": false
           },
           "mappings": [],
           "thresholds": {
@@ -270,7 +513,7 @@
         "h": 11,
         "w": 9,
         "x": 14,
-        "y": 0
+        "y": 4
       },
       "id": 8,
       "options": {
@@ -283,12 +526,12 @@
         },
         "showHeader": true
       },
-      "pluginVersion": "8.4.7",
+      "pluginVersion": "9.0.2",
       "targets": [
         {
           "datasource": {
             "type": "postgres",
-            "uid": "${DS_CLOUDSQL}"
+            "uid": "${DS_POSTGRESQL}"
           },
           "format": "table",
           "group": [],
@@ -324,7 +567,7 @@
     {
       "datasource": {
         "type": "postgres",
-        "uid": "${DS_CLOUDSQL}"
+        "uid": "${DS_POSTGRESQL}"
       },
       "fieldConfig": {
         "defaults": {
@@ -333,7 +576,8 @@
           },
           "custom": {
             "align": "auto",
-            "displayMode": "auto"
+            "displayMode": "auto",
+            "inspect": false
           },
           "mappings": [],
           "thresholds": {
@@ -356,7 +600,7 @@
         "h": 13,
         "w": 24,
         "x": 0,
-        "y": 11
+        "y": 15
       },
       "id": 6,
       "options": {
@@ -369,12 +613,12 @@
         },
         "showHeader": true
       },
-      "pluginVersion": "8.4.7",
+      "pluginVersion": "9.0.2",
       "targets": [
         {
           "datasource": {
             "type": "postgres",
-            "uid": "${DS_CLOUDSQL}"
+            "uid": "${DS_POSTGRESQL}"
           },
           "format": "table",
           "group": [],
@@ -408,7 +652,7 @@
       "type": "table"
     }
   ],
-  "schemaVersion": 35,
+  "schemaVersion": 36,
   "style": "dark",
   "tags": [],
   "templating": {
@@ -417,7 +661,7 @@
         "current": {},
         "datasource": {
           "type": "postgres",
-          "uid": "${DS_CLOUDSQL}"
+          "uid": "${DS_POSTGRESQL}"
         },
         "definition": "select distinct(project_id) from gcp_resources",
         "description": "Google Project ID to filter by",
@@ -438,7 +682,7 @@
         "current": {},
         "datasource": {
           "type": "postgres",
-          "uid": "${DS_CLOUDSQL}"
+          "uid": "${DS_POSTGRESQL}"
         },
         "definition": "select distinct(cq_table) from gcp_resources",
         "description": "CQ Tables to filter by",
@@ -465,6 +709,6 @@
   "timezone": "",
   "title": "GCP Asset Inventory",
   "uid": "cCpTRPC7z",
-  "version": 12,
+  "version": 3,
   "weekStart": ""
 }
