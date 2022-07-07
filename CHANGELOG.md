@@ -1,5 +1,13 @@
 # Changelog
 
+## [0.0.2](https://github.com/cloudquery/dashboards/compare/v0.0.1...v0.0.2) (2022-07-07)
+
+
+### Features
+
+* Add Azure asset inventory dashboard ([#22](https://github.com/cloudquery/dashboards/issues/22)) ([6f22d7a](https://github.com/cloudquery/dashboards/commit/6f22d7af14400ee5f1698edcd66f129356abef58))
+* Add last refresh time and data source health ([#21](https://github.com/cloudquery/dashboards/issues/21)) ([40c84ca](https://github.com/cloudquery/dashboards/commit/40c84ca438543b08a6ced7396065c2f8db8022a6))
+
 ## 0.0.1 (2022-06-26)
 
 
