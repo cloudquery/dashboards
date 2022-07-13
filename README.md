@@ -15,37 +15,46 @@ Checkout those tutorials:
 
 ## What's inside?
 
-Currently we have cloud asset inventory dashboards for AWS, GCP filterable by account_ids, regions and tables (project_ids for GCP) (more is coming).
+Currently we have cloud asset inventory dashboards for AWS, Azure and GCP filterable by account_ids, regions and tables (project_ids for GCP) (more is coming).
 
-### AWS
+### AWS Asset Inventory
 
-> ⚠️ **Note**: aws_asset_inventory.json will require execution of the following [view](https://github.com/cloudquery/cq-provider-aws/blob/main/views/resources.sql) before importing the dashboard.
+<img alt="AWS Asset Inventory" src="./dashboards/aws/aws_asset_inventory.png" width=50% height=50%>
 
-Located under [./dashboards/aws](./dashboards/aws)
+#### Installation
 
-### Azure
+1. Execute [this query](https://github.com/cloudquery/cq-provider-aws/blob/main/views/resources.sql) to add the `aws_resources` view.
+2. Add the CloudQuery postgres database as a data source to Grafana (`Configuration -> Data Sources -> Add Data Source`)
+3. Import [dashboards/aws/aws_asset_inventory.json](./dashboards/aws/aws_asset_inventory.json) into Grafana (`Import -> Upload JSON File`).
 
-> ⚠️ **Note**: azure_asset_inventory.json will require execution of the following [view](https://github.com/cloudquery/cq-provider-azure/blob/main/views/resource.sql) before importing the dashboard.
+### AWS EC2 Public/Private Instances
 
-Located under [./dashboards/azure](./dashboards/azure)
+<img alt="AWS EC2 Public/Private Instances Grafana Dashboard" src="./dashboards/aws/aws_ec2_public_private.png" width=50% height=50%>
 
-### GCP
+#### Installation
 
-> ⚠️ **Note**: gcp_asset_inventory.json will require execution of the following [view](https://github.com/cloudquery/cq-provider-gcp/blob/main/views/resource.sql) before importing the dashboard.
+1. Add the CloudQuery postgres database as a data source to Grafana (`Configuration -> Data Sources -> Add Data Source`)
+2. Import [dashboards/aws/aws_ec2_public_private.json](./dashboards/aws/aws_ec2_public_private.json) into Grafana (`Import -> Upload JSON File`).
 
-Located under [./dashboards/gcp](./dashboards/gcp)
+### Azure Asset Inventory
 
-### Examples
+<img alt="Azure Asset Inventory Grafana Dashboard" src="./dashboards/azure/azure_asset_inventory.png" width=50% height=50%>
 
-Here is an example of AWS asset inventory Grafana dashboard:
+#### Installation
 
-![AWS Asset Inventory](./dashboards/aws/aws_asset_inventory.png)
+1. Execute [this query](https://github.com/cloudquery/cq-provider-azure/blob/main/views/resources.sql) to add the `azure_resources` view.
+2. Add the CloudQuery postgres database as a data source to Grafana (`Configuration -> Data Sources -> Add Data Source`)
+3. Import [dashboards/azure/azure_asset_inventory.json](./dashboards/azure/azure_asset_inventory.json) into Grafana (`Import -> Upload JSON File`).
 
-Here is an example of AWS EC2 Public and Private Instances Grafana dashboard:
+### GCP Asset Inventory
 
-![AWS EC2 Public/Private Instances](./dashboards/aws/aws_ec2_public_private.png)
+<img alt="GCP Asset Inventory Grafana Dashboard" src="./dashboards/gcp/gcp_asset_inventory.png" width=50% height=50%>
 
-![GCP Asset Inventory](./dashboards/gcp/gcp_asset_inventory.png)
+#### Installation
+
+1. Execute [this query](https://github.com/cloudquery/cq-provider-gcp/blob/main/views/resources.sql) to add the `gcp_resources` view.
+2. Add the CloudQuery postgres database as a data source to Grafana (`Configuration -> Data Sources -> Add Data Source`)
+3. Import [dashboards/gcp/gcp_asset_inventory.json](./dashboards/gcp/gcp_asset_inventory.json) into Grafana (`Import -> Upload JSON File`).
 
 ## Contributions
 
