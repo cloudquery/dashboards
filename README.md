@@ -42,7 +42,7 @@ Currently we have cloud asset inventory dashboards for AWS, Azure and GCP filter
 
 #### Installation
 
-1. Execute [this query](https://github.com/cloudquery/cq-provider-azure/blob/main/views/resources.sql) to add the `azure_resources` view.
+1. Execute [this query](https://github.com/cloudquery/cq-provider-azure/blob/main/views/resource.sql) to add the `azure_resources` view.
 2. Add the CloudQuery postgres database as a data source to Grafana (`Configuration -> Data Sources -> Add Data Source`)
 3. Import [dashboards/azure/azure_asset_inventory.json](./dashboards/azure/azure_asset_inventory.json) into Grafana (`Import -> Upload JSON File`).
 
@@ -52,7 +52,7 @@ Currently we have cloud asset inventory dashboards for AWS, Azure and GCP filter
 
 #### Installation
 
-1. Execute [this query](https://github.com/cloudquery/cq-provider-gcp/blob/main/views/resources.sql) to add the `gcp_resources` view.
+1. Execute [this query](https://github.com/cloudquery/cq-provider-gcp/blob/main/views/resource.sql) to add the `gcp_resources` view.
 2. Add the CloudQuery postgres database as a data source to Grafana (`Configuration -> Data Sources -> Add Data Source`)
 3. Import [dashboards/gcp/gcp_asset_inventory.json](./dashboards/gcp/gcp_asset_inventory.json) into Grafana (`Import -> Upload JSON File`).
 
